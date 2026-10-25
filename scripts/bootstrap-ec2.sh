@@ -7,13 +7,11 @@ if [[ $(id -u) -ne 0 ]]; then
   exit 1
 fi
 
-dnf install -y docker git curl openssl
+dnf install -y docker git openssl
 systemctl enable --now docker
 
 install -d -m 0755 /usr/local/lib/docker/cli-plugins
-curl -fL --retry 3 \
-  https://github.com/docker/compose/releases/download/v5.6.0/docker-compose-linux-x86_64 \
-  -o /usr/local/lib/docker/cli-plugins/docker-compose
+curl -fL --retry 3 https://github.com/docker/compose/releases/download/v5.6.0/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose
 chmod 0755 /usr/local/lib/docker/cli-plugins/docker-compose
 docker compose version
 
