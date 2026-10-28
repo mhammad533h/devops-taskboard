@@ -42,8 +42,8 @@ def health():
                 cur.fetchone()
     except psycopg.Error:
         app.logger.exception("Database health check failed")
-        return jsonify(status="unhealthy"), 503
-    return jsonify(status="ok")
+        return jsonify(status="unhealthy", status_code=503), 503
+    return jsonify(status="ok", status_code=200), 200
 
 
 @app.get("/")
